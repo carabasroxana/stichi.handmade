@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:lang="${#locale}">
+<head>
+    <meta charset="UTF-8" />
+    <title th:text="#{home.title}">Stichi Handmade</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<nav>
+    <a th:href="@{/}" th:text="#{nav.home}">Home</a> |
+    <a th:href="@{/products}" th:text="#{nav.products}">Products</a> |
+    <a th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
+
+    <span style="float:right; margin-right:1rem;">
+    <a th:href="@{${#request.requestURI}(lang=${#locale.language == 'en' ? 'ro' : 'en'})}"
+       th:text="${#locale.language == 'en' ? 'Română' : 'English'}">
+      Română
+    </a>
+  </span>
+</nav>
+
+
+<main>
+    <h1 th:text="#{home.title}">Welcome to Stichi Handmade</h1>
+    <p th:text="#{home.subtitle}">Crochet Accessories &amp; Clothes</p>
+</main>
+
+<footer>
+    <p>&copy; 2025 Stichi Handmade</p>
+</footer>
+</body>
+</html>

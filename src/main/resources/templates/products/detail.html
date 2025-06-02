@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale}">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${product.name} + ' - ' + #{product.detail.title}">Product Details</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<nav>
+  <a th:href="@{/}" th:text="#{nav.home}">Home</a> |
+  <a th:href="@{/products}" th:text="#{nav.products}">Products</a> |
+  <a th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
+
+  <span style="float:right; margin-right:1rem;">
+    <a th:href="@{${#request.requestURI}(lang=${#locale.language == 'en' ? 'ro' : 'en'})}"
+       th:text="${#locale.language == 'en' ? 'Română' : 'English'}">
+      Română
+    </a>
+  </span>
+</nav>
+
+
+<main>
+  <h1 th:text="${product.name}">Product Name</h1>
+  <p><strong th:text="#{product.detail.description}">Description:</strong>
+    <span th:text="${product.description}">Long description here</span>
+  </p>
+  <p th:if="${product.price != null}">
+    <strong th:text="#{product.detail.price(${product.price})}">Price: $45.0</strong>
+  </p>
+
+  <p th:if="${product.inStock}">
+    <span th:text="#{product.detail.inStock}">In Stock</span> -
+    <span th:text="#{products.stock(${product.stockCount})}">In Stock: 5</span>
+  </p>
+  <p th:if="${!product.inStock}">
+    <span th:text="#{product.detail.outOfStock}">Out of Stock</span><br/>
+    <span th:text="#{products.leadTime(${product.leadTimeDays})}">Lead Time: 7 days</span>
+    <br/>
+    <span th:text="#{products.availableColors(${product.availableColors})}">
+            Available Colors: red,blue,white
+        </span><br/>
+    <span th:text="#{products.customOptions(${product.customOptions})}">
+            Custom Options: size,pattern
+        </span>
+  </p>
+
+  <p>
+    <a th:href="@{/products}" th:text="#{product.detail.back}">Back to products</a>
+  </p>
+</main>
+
+<footer>
+  <p>&copy; 2025 Stichi Handmade</p>
+</footer>
+</body>
+</html>

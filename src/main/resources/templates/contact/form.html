@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale}">
+<head>
+  <meta charset="UTF-8"/>
+  <title th:text="#{contact.title}">Contact Us</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<nav>
+  <a th:href="@{/}" th:text="#{nav.home}">Home</a> |
+  <a th:href="@{/products}" th:text="#{nav.products}">Products</a> |
+  <a th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
+
+  <span style="float:right; margin-right:1rem;">
+    <a th:href="@{${#request.requestURI}(lang=${#locale.language == 'en' ? 'ro' : 'en'})}"
+       th:text="${#locale.language == 'en' ? 'Română' : 'English'}">
+      Română
+    </a>
+  </span>
+</nav>
+
+
+<main>
+  <h1 th:text="#{contact.title}">Contact Us</h1>
+
+  <div th:if="${successMessage}">
+    <p th:text="#{contact.success}">Your message has been sent. Thank you!</p>
+  </div>
+  <div th:if="${errorMessage}">
+    <p th:text="#{contact.error}">There was an error sending your message.</p>
+  </div>
+
+  <form th:action="@{/contact}" th:object="${contactForm}" method="post">
+    <label th:for="name" th:text="#{contact.name}">Name</label><br/>
+    <input type="text" id="name" th:field="*{name}" /><br/>
+    <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+    <label th:for="email" th:text="#{contact.email}">Email</label><br/>
+    <input type="email" id="email" th:field="*{email}" /><br/>
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+
+    <label th:for="message" th:text="#{contact.message}">Message</label><br/>
+    <textarea id="message" th:field="*{message}"></textarea><br/>
+    <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></div>
+
+    <button type="submit" th:text="#{btn.submit}">Submit</button>
+  </form>
+
+  <p>
+    <em th:text="#{contact.instagram}">Follow us on Instagram @stichi.handmade</em>
+  </p>
+</main>
+
+<footer>
+  <p>&copy; 2025 Stichi Handmade</p>
+</footer>
+</body>
+</html>
