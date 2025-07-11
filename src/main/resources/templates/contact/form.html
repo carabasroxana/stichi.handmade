@@ -7,67 +7,105 @@
 
   <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
-          rel="stylesheet"
-  />
-
+          rel="stylesheet"/>
   <link rel="stylesheet" th:href="@{/css/style.css}" />
-
   <link rel="stylesheet" th:href="@{/css/contact.css}" />
 </head>
 
 <body class="bg-light text-text-dark font-lato">
-  <header>
-    <div class="nav-container">
-      <nav>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/products/list">Products</a></li>
-          <li><a href="/contact">Contact</a></li>
-        </ul>
-      </nav>
-      <div class="lang-switch">
-        <a href="?lang=ro" class="lang-btn">Română</a>
-      </div>
+
+<header>
+  <div class="nav-container">
+    <nav>
+      <ul>
+        <li>
+          <a th:href="@{/}"
+             th:text="#{nav.home}"
+          >Home</a>
+        </li>
+        <li>
+          <a th:href="@{/products/list}"
+             th:text="#{nav.products}"
+          >Products</a>
+        </li>
+        <li>
+          <a th:href="@{/contact}"
+             th:text="#{nav.contact}"
+          >Contact</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="lang-switch">
+      <a th:if="${#locale.language == 'en'}"
+         th:href="@{${#request.requestURI}(lang='ro')}"
+         th:text="#{btn.language}"
+         class="lang-btn"
+      >Română</a>
+      <a th:if="${#locale.language == 'ro'}"
+         th:href="@{${#request.requestURI}(lang='en')}"
+         th:text="#{btn.language}"
+         class="lang-btn"
+      >English</a>
     </div>
-  </header>
-
-<main class="px-4 py-12">
-  <div class="contact-card">
-    <h1 th:text="#{contact.title}">Contact Us</h1>
-
-    <div th:if="${successMessage}" class="form-group">
-      <p class="success" th:text="#{contact.success}">Your message has been sent. Thank you!</p>
-    </div>
-    <div th:if="${errorMessage}" class="form-group">
-      <p class="error" th:text="#{contact.error}">There was an error sending your message.</p>
-    </div>
-
-    <form th:action="@{/contact}" th:object="${contactForm}" method="post">
-      <div class="form-group">
-        <label th:for="name"    th:text="#{contact.name}">Name</label>
-        <input type="text" id="name" th:field="*{name}" placeholder="Your name…" required/>
-        <div th:errors="*{name}" class="error" th:if="${#fields.hasErrors('name')}"></div>
-      </div>
-
-      <div class="form-group">
-        <label th:for="email"   th:text="#{contact.email}">Email</label>
-        <input type="email" id="email" th:field="*{email}" placeholder="you@example.com" required/>
-        <div th:errors="*{email}" class="error" th:if="${#fields.hasErrors('email')}"></div>
-      </div>
-
-      <div class="form-group">
-        <label th:for="message" th:text="#{contact.message}">Message</label>
-        <textarea id="message" th:field="*{message}" rows="5" placeholder="How can I help?" required></textarea>
-        <div th:errors="*{message}" class="error" th:if="${#fields.hasErrors('message')}"></div>
-      </div>
-
-      <button type="submit" th:text="#{btn.submit}">Submit</button>
-    </form>
-
-    <p class="footer-note" th:text="#{contact.instagram}">
-      Follow us on Instagram @stichi.handmade
-    </p>
   </div>
+</header>
+
+<main>
+  <section class="page-section">
+    <div class="page-container">
+      <div class="contact-card">
+
+        <h1 th:text="#{contact.title}">Contact Us</h1>
+
+        <div th:if="${successMessage}" class="form-group">
+          <p class="success" th:text="#{contact.success}"></p>
+        </div>
+        <div th:if="${errorMessage}" class="form-group">
+          <p class="error" th:text="#{contact.error}"></p>
+        </div>
+
+        <form th:action="@{/contact}" th:object="${contactForm}" method="post">
+          <div class="form-group">
+            <label th:for="name" th:text="#{contact.name}">Name</label>
+            <input
+                    type="text"
+                    id="name"
+                    th:field="*{name}"
+                    th:placeholder="#{contact.placeholder.name}"
+                    required/>
+            <div th:errors="*{name}" class="error"></div>
+          </div>
+
+          <div class="form-group">
+            <label th:for="email" th:text="#{contact.email}">Email</label>
+            <input
+                    type="email"
+                    id="email"
+                    th:field="*{email}"
+                    th:placeholder="#{contact.placeholder.email}"
+                    required/>
+            <div th:errors="*{email}" class="error"></div>
+          </div>
+
+          <div class="form-group">
+            <label th:for="message" th:text="#{contact.message}">Message</label>
+            <textarea
+                    id="message"
+                    th:field="*{message}"
+                    rows="5"
+                    th:placeholder="#{contact.placeholder.message}"
+                    required>
+              </textarea>
+            <div th:errors="*{message}" class="error"></div>
+          </div>
+
+          <button type="submit" th:text="#{btn.submit}">Submit</button>
+        </form>
+
+        <p class="footer-note" th:text="#{contact.instagram}"></p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>

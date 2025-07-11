@@ -7,9 +7,9 @@
 
     <link
             href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
-            rel="stylesheet"
-    />
-
+            rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
     <style>
         :root {
             --green-olive: #969c5f;
@@ -123,17 +123,20 @@
         .hero-text .instagram-link:hover { color: var(--green-olive); }
 
         .hero-image {
-            flex: 0 0 auto;
-            width: 300px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background: none;
+            padding:    0;
+            box-shadow: none;
+            width:      auto;
+            height:     auto;
+        }
+        .hero-image::before {
+            display: none;
         }
         .hero-image img {
-            display: block;
-            width: 100%; height: auto;
-            object-fit: contain;
             border-radius: 50%;
+            border:         none;
+            max-width:      300px;
+            height:         auto;
         }
 
         @media (max-width: 768px) {
@@ -187,13 +190,11 @@
 
 <section class="hero">
     <div class="hero-text">
-        <h1>Stichi Handmade</h1>
-        <p class="tagline">
-            Handcrafted crochet accessories & clothing<br />
-            made with love.
-        </p>
+        <h1 data-aos="fade-up" th:text="#{home.title}">Elevating Crochet to Wearable Art</h1>
+        <p class="tagline" th:text="#{home.subtitle}"></p>
+        <a class="btn-cta" th:href="@{/products/list}" th:text="#{home.cta}">Shop Now</a>
         <p>
-            Follow my work in real time on Instagram:
+            <span th:text="#{home.followText}">Follow my work in real time on Instagram:</span>
             <a
                     class="instagram-link"
                     href="https://www.instagram.com/stichi.handmade"
@@ -208,8 +209,38 @@
     </div>
 </section>
 
+<section class="featured-products">
+    <h2 th:text="#{home.featuredTitle}">Just Added</h2>
+    <div class="grid">
+        <div class="card" th:each="p : ${featured}">
+            <img th:src="@{${p.imageUrl}}" alt="" />
+            <h3 th:text="${p.name}">Cozy Scarf</h3>
+            <p th:text="${p.price + ' lei'}">120 lei</p>
+        </div>
+    </div>
+</section>
+
+<section class="about-me">
+    <div class="img-wrapper">
+        <img src="/images/aboutme.jpg" alt="Me at work" />
+    </div>
+    <div class="about-text">
+        <h2 th:text="#{home.aboutTitle}">Meet the Maker</h2>
+        <p th:text="#{home.aboutText}">
+            I turn simple fabrics into one-of-a-kind garments that feel as good as they look…
+        </p>
+    </div>
+</section>
+
 <footer>
     &copy; 2025 Stichi Handmade | Handcrafted in Romania
 </footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800
+    });
+</script>
 </body>
 </html>
