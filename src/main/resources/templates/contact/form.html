@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title th:text="#{contact.title}">Contact Us</title>
 
-  <!-- Google Fonts (same as Home) -->
   <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
           rel="stylesheet"
@@ -17,37 +16,20 @@
 </head>
 
 <body class="bg-light text-text-dark font-lato">
-<header>
-  <div class="nav-container">
-    <nav>
-      <ul>
-        <li><a th:href="@{/}"         th:text="#{nav.home}">Home</a></li>
-        <li><a th:href="@{/products}" th:text="#{nav.products}">Products</a></li>
-        <li>
-          <a th:href="@{/contact}"
-             th:text="#{nav.contact}"
-             class="active">
-            Contact
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <div class="lang-switch">
-      <a
-              th:if="${#locale.language=='en'}"
-              th:href="@{${#request.requestURI}(lang='ro')}"
-              class="lang-btn">
-        Română
-      </a>
-      <a
-              th:if="${#locale.language=='ro'}"
-              th:href="@{${#request.requestURI}(lang='en')}"
-              class="lang-btn">
-        English
-      </a>
+  <header>
+    <div class="nav-container">
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/products/list">Products</a></li>
+          <li><a href="/contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="lang-switch">
+        <a href="?lang=ro" class="lang-btn">Română</a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
 <main class="px-4 py-12">
   <div class="contact-card">
