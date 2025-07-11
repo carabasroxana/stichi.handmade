@@ -1,33 +1,215 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      th:lang="${#locale}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title th:text="#{home.title}">Stichi Handmade</title>
-    <link rel="stylesheet" href="/css/style.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stichi Handmade</title>
+
+    <link
+            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Lato:wght@300;400;700&display=swap"
+            rel="stylesheet"
+    />
+
+    <style>
+        :root {
+            --green-olive: #969c5f;
+            --pink-rose:   #e99fad;
+            --text-dark:   #333333;
+            --bg-light:    #faf7f3;
+            --bg-white:    #ffffff;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+        }
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        a { color: inherit; text-decoration: none; }
+
+        header {
+            background: var(--bg-white);
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0ddd9;
+        }
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-container nav {
+            flex: 1;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+        }
+        nav ul li {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+        nav ul li a {
+            position: relative;
+            padding: 0.25rem 0;
+            transition: color 0.2s ease;
+        }
+        nav ul li a:hover { color: var(--green-olive); }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -2px;
+            width: 0; height: 2px;
+            background: var(--green-olive);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after { width: 100%; }
+
+        .lang-switch { margin-left: 2rem; }
+        .lang-btn {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9rem; font-weight: 600;
+            padding: 0.4rem 0.8rem;
+            border: 2px solid var(--pink-rose);
+            border-radius: 4px;
+            background-color: var(--bg-white);
+            color: var(--pink-rose);
+            transition: all 0.2s ease;
+        }
+        .lang-btn:hover {
+            background-color: var(--pink-rose);
+            color: #fff;
+            border-color: var(--pink-rose);
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 3rem;
+        }
+        .hero-text {
+            flex: 1; min-width: 280px;
+        }
+        .hero-text h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem; font-weight: 700;
+            color: var(--green-olive);
+            margin-bottom: 1rem;
+        }
+        .hero-text p.tagline {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .hero-text .instagram-link {
+            display: inline-block;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            color: var(--pink-rose);
+            transition: color 0.2s ease;
+        }
+        .hero-text .instagram-link:hover { color: var(--green-olive); }
+
+        .hero-image {
+            flex: 0 0 auto;
+            width: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .hero-image img {
+            display: block;
+            width: 100%; height: auto;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-text p.tagline { font-size: 1.1rem; }
+            nav ul { gap: 1rem; }
+            .lang-switch { margin-left: 1rem; }
+        }
+
+        footer {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-top: 1px solid #e0ddd9;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
 </head>
+
 <body>
-<nav>
-    <a th:href="@{/}" th:text="#{nav.home}">Home</a> |
-    <a th:href="@{/products}" th:text="#{nav.products}">Products</a> |
-    <a th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
+<header>
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li><a th:href="@{/}" href="/">Home</a></li>
+                <li><a th:href="@{/products/list}" href="/products/list">Products</a></li>
+                <li><a th:href="@{/contact}" href="/contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="lang-switch">
+            <a
+                    th:if="${#locale.language == 'en'}"
+                    th:href="@{${#request.requestURI}(lang='ro')}"
+                    class="lang-btn"
+                    href="?lang=ro"
+            >Română</a>
+            <a
+                    th:if="${#locale.language == 'ro'}"
+                    th:href="@{${#request.requestURI}(lang='en')}"
+                    class="lang-btn"
+                    href="?lang=en"
+            >English</a>
+        </div>
+    </div>
+</header>
 
-    <span style="float:right; margin-right:1rem;">
-    <a th:href="@{${#request.requestURI}(lang=${#locale.language == 'en' ? 'ro' : 'en'})}"
-       th:text="${#locale.language == 'en' ? 'Română' : 'English'}">
-      Română
-    </a>
-  </span>
-</nav>
+<section class="hero">
+    <div class="hero-text">
+        <h1>Stichi Handmade</h1>
+        <p class="tagline">
+            Handcrafted crochet accessories & clothing<br />
+            made with love.
+        </p>
+        <p>
+            Follow my work in real time on Instagram:
+            <a
+                    class="instagram-link"
+                    href="https://www.instagram.com/stichi.handmade"
+                    target="_blank"
+                    rel="noopener"
+            >@stichi.handmade</a>
+        </p>
+    </div>
 
-
-<main>
-    <h1 th:text="#{home.title}">Welcome to Stichi Handmade</h1>
-    <p th:text="#{home.subtitle}">Crochet Accessories &amp; Clothes</p>
-</main>
+    <div class="hero-image">
+        <img th:src="@{/images/logo.jpg}" alt="Stichi Handmade logo">
+    </div>
+</section>
 
 <footer>
-    <p>&copy; 2025 Stichi Handmade</p>
+    &copy; 2025 Stichi Handmade | Handcrafted in Romania
 </footer>
 </body>
 </html>
