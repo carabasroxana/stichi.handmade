@@ -4,15 +4,21 @@
 <body>
 <h1>All Products</h1>
 <table>
-    <thead><tr><th>ID</th><th>Name</th><th>Price</th></tr></thead>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+    </tr>
+    </thead>
     <tbody>
     <tr th:each="p : ${products}">
         <td th:text="${p.id}">1</td>
         <td th:text="${p.name}">Sample</td>
-        <td th:text="${p.price}">9.99</td>
+        <td th:text="${p.description}">Sample description</td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{ / }">← Home</a>
+<a th:href="@{/static}">← Home</a>
 </body>
 </html>

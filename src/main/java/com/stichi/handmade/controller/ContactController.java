@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.validation.Valid;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/contact")
@@ -24,7 +24,7 @@ public class ContactController {
     @GetMapping
     public String showContactForm(Model model) {
         model.addAttribute("contactForm", new ContactForm());
-        return "contact/form";   // src/main/resources/templates/contact/form.html
+        return "contact/form";
     }
 
     @PostMapping
