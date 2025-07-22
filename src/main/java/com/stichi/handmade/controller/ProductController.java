@@ -1,36 +1,26 @@
 package com.stichi.handmade.controller;
 
-import com.stichi.handmade.model.Product;
-import com.stichi.handmade.repository.ProductRepository;
-import org.springframework.stereotype.Controller;
+import com.stichi.handmade.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/products")
 public class ProductController {
+    private final ProductService productService;
 
-    private final ProductRepository repo;
-
-    public ProductController(ProductRepository repo) {
-        this.repo = repo;
+    @Autowired
+    public ProductController (ProductService productService) {
+        this.productService = productService;
     }
 
-    @GetMapping("/products")
-    public String listProducts(Model model) {
-        model.addAttribute("products", repo.findAll());
-        return "products";
-    }
-
-    @GetMapping("/products/new")
-    public String showForm(Model model) {
-        model.addAttribute("product", new Product());
-        return "product-form";
-    }
-
-    @PostMapping("/products")
-    public String save(Product product) {
-        repo.save(product);
-        return "redirect:/products";
+    @GetMapping("/{id}")
+    public String viewProduct (@PathVariable Long id, Model model) {
+        model.addAttribute("product", productService.getProductDtoById(id));
+        return "products/detail";
     }
 }
