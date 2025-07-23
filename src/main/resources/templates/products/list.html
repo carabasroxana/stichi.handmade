@@ -1,57 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:lang="${#locale}">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8" />
-  <title th:text="#{products.title}">Our Products</title>
-  <link rel="stylesheet" href="/css/style.css"/>
+    <title>Available Products</title>
 </head>
 <body>
-<nav>
-  <a th:href="@{/}" th:text="#{nav.home}">Home</a> |
-  <a th:href="@{/products}" th:text="#{nav.products}">Products</a> |
-  <a th:href="@{/contact}" th:text="#{nav.contact}">Contact</a>
-
-  <span style="float:right; margin-right:1rem;">
-    <a th:href="@{${#request.requestURI}(lang=${#locale.language == 'en' ? 'ro' : 'en'})}"
-       th:text="${#locale.language == 'en' ? 'Română' : 'English'}">
-      Română
-    </a>
-  </span>
-</nav>
-
-
-<main>
-  <h1 th:text="#{products.title}">Our Products</h1>
-  <div th:if="${products.isEmpty()}">
-    <p>No products available at the moment.</p>
-  </div>
-  <div th:each="prod : ${products}">
-    <h2>
-      <a th:href="@{/products/{id}(id=${prod.id})}"
-         th:text="${prod.name}">Product Name</a>
-    </h2>
-    <p th:text="${#strings.abbreviate(prod.description, 0, 100)} + '...'">
-      Short description...
-    </p>
-    <p>
-            <span th:if="${prod.inStock}">
-                <strong th:text="#{products.stock(${prod.stockCount})}">
-                    In Stock: 5
-                </strong>
-            </span>
-      <span th:if="${!prod.inStock}">
-                <strong th:text="#{products.madeToOrder}">Made to Order</strong><br/>
-                <span th:text="#{products.leadTime(${prod.leadTimeDays})}">
-                    Lead Time: 7 days
-                </span>
-            </span>
-    </p>
-    <hr/>
-  </div>
-</main>
-
-<footer>
-  <p>&copy; 2025 Stichi Handmade</p>
-</footer>
+<h1>Available Products</h1>
+<ul>
+    <li th:each="p : ${products}">
+        <a th:href="@{/products/{id}(id=${p.id})}"
+           th:text="${p.name}">Product Name</a>
+        — <span th:text="${p.description}">Description</span>
+    </li>
+</ul>
 </body>
 </html>

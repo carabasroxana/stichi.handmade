@@ -3,9 +3,13 @@ package com.stichi.handmade.service;
 import com.stichi.handmade.dto.ProductRequestDto;
 import com.stichi.handmade.model.Product;
 import com.stichi.handmade.repository.ProductRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityNotFoundException;
+import java.util.stream.Collectors;
+import java.util.List;
+
 
 @Service
 public class ProductService {
@@ -24,5 +28,15 @@ public class ProductService {
                 .name(productEntity.getName())
                 .description(productEntity.getDescription())
                 .build();
+    }
+
+    public List<ProductRequestDto> getAllProducts() {
+        return productRepository.findAll().stream()
+                .map(entity -> ProductRequestDto.builder()
+                        .id(entity.getId())
+                        .name(entity.getName())
+                        .description(entity.getDescription())
+                        .build())
+                .collect(Collectors.toList());
     }
 }

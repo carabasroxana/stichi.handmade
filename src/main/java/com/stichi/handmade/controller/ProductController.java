@@ -23,4 +23,11 @@ public class ProductController {
         model.addAttribute("product", productService.getProductDtoById(id));
         return "products/detail";
     }
+
+    @GetMapping
+    public String listProducts(Model model) {
+        model.addAttribute("products",
+                productService.getAllProducts());
+        return "products/list";
+    }
 }

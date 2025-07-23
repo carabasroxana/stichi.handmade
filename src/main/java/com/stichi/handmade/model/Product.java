@@ -1,8 +1,8 @@
 package com.stichi.handmade.model;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Getter
