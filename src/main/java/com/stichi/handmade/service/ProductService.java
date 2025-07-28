@@ -35,7 +35,7 @@ public class ProductService {
 
     public List<ProductRequestDto> getAllProducts() {
         return productRepository.findAll().stream()
-                .map(this::toDto)
+                .map(p -> toDto(p))
                 .collect(Collectors.toList());
     }
 

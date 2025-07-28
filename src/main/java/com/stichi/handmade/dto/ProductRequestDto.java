@@ -1,6 +1,5 @@
 package com.stichi.handmade.dto;
 
-import javax.persistence.AssociationOverride;
 
 public class ProductRequestDto {
     private Long id;

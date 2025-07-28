@@ -1,58 +1,34 @@
 package com.stichi.handmade.controller;
 
 import com.stichi.handmade.model.ContactForm;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import com.stichi.handmade.service.ContactService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 
-@Controller
-@RequestMapping("/contact")
+@RestController
+@RequestMapping("/api/contact")
 public class ContactController {
-
-    @Autowired
-    private JavaMailSender mailSender;
-
-    @GetMapping
-    public String showContactForm(Model model) {
-        model.addAttribute("contactForm", new ContactForm());
-        return "contact/form";
+    private final ContactService contactService;
+    public ContactController(ContactService contactService) {
+        this.contactService = contactService;
     }
 
     @PostMapping
-    public String submitContactForm(
-            @ModelAttribute("contactForm") @Valid ContactForm form,
-            BindingResult bindingResult,
-            Model model) {
-
-        if (bindingResult.hasErrors()) {
-            return "contact/form";
-        }
-
+    public ResponseEntity<?> submit(@RequestBody @Valid ContactForm form) {
         try {
-            SimpleMailMessage mail = new SimpleMailMessage();
-            mail.setTo("stichi.handmade@example.com"); // ← replace with your “To:” address
-            mail.setSubject("New contact from " + form.getName());
-            mail.setText(
-                    "Name: " + form.getName() + "\n" +
-                            "Email: " + form.getEmail() + "\n\n" +
-                            "Message:\n" + form.getMessage()
-            );
-            mailSender.send(mail);
-
-            model.addAttribute("successMessage", "contact.success");
-        } catch (Exception ex) {
-            model.addAttribute("errorMessage", "contact.error");
+            contactService.send(form);
+            return ResponseEntity.accepted().build();
+        } catch (MailException ex) {
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Failed to send message");
         }
-
-        return "contact/form";
     }
 }
