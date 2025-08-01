@@ -1,0 +1,27 @@
+{
+  "btn": {
+    "language": "Română"
+  },
+  "home": {
+    "productsButton": "Products",
+    "followText": "Follow my work in real time on Instagram:",
+    "featuredTitle": "Just Added",
+    "viewAllProducts": "View all products",
+    "aboutTitle": "Meet the Maker",
+    "aboutText": "I turn simple fabrics into one-of-a-kind garments that feel as good as they look…"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Your name",
+    "email": "Email",
+    "message": "Message",
+    "placeholder": {
+      "name": "Your name",
+      "email": "you@example.com",
+      "message": "How can I help you?"
+    },
+    "success": "Thanks! We’ll be in touch.",
+    "error": "Oops, something went wrong."
+  }
+}
+

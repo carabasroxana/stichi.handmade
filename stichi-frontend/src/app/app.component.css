@@ -1,0 +1,268 @@
+:root {
+  --green-olive: #969c5f;
+  --pink-rose:   #e99fad;
+  --text-dark:   #333333;
+  --bg-light:    #faf7f3;
+  --bg-white:    #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, :host {
+  display: block;
+  font-family: 'Lato', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--bg-white);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #e0ddd9;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+nav ul li {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+nav ul li a {
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+nav ul li a:hover {
+  color: var(--green-olive);
+}
+
+nav ul li a::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 2px;
+  background: var(--green-olive);
+  transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+  width: 100%;
+}
+
+.lang-switch {
+  margin-left: 2rem;
+}
+
+.lang-btn {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border: 2px solid var(--pink-rose);
+  border-radius: 4px;
+  background-color: var(--bg-white);
+  color: var(--pink-rose);
+  transition: all 0.2s ease;
+}
+
+.lang-btn:hover {
+  background-color: var(--pink-rose);
+  color: #fff;
+  border-color: var(--pink-rose);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  padding: 4rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.hero-text h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--green-olive);
+  margin-bottom: 1rem;
+}
+
+.hero-text .tagline {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-text .btn {
+  display: inline-block;
+  background: var(--pink-rose);
+  color: var(--bg-white);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.hero-text .btn:hover {
+  background: var(--green-olive);
+}
+
+.hero-text .instagram-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--pink-rose);
+  transition: color 0.2s ease;
+}
+
+.hero-text .instagram-link:hover {
+  color: var(--green-olive);
+}
+
+.hero-image img {
+  border-radius: 50%;
+  max-width: 300px;
+  height: auto;
+}
+
+.featured-products {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+}
+
+.featured-products h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: var(--green-olive);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.featured-products .grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.featured-products .card {
+  background: var(--bg-white);
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  overflow: hidden;
+  text-align: center;
+}
+
+.featured-products .card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.featured-products .card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.featured-products .card .price {
+  color: var(--pink-rose);
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.featured-products .view-all {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: 600;
+  color: var(--pink-rose);
+  text-decoration: underline;
+}
+
+.about-me {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.about-me .img-wrapper img {
+  border-radius: 8px;
+  max-width: 100%;
+  height: auto;
+}
+
+.about-me .about-text h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: var(--green-olive);
+  margin-bottom: 1rem;
+}
+
+.about-me .about-text p {
+  font-size: 1rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+footer {
+  background: var(--bg-white);
+  padding: 2rem;
+  border-top: 1px solid #e0ddd9;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .hero-text h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-text .tagline {
+    font-size: 1.1rem;
+  }
+
+  .featured-products .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-me {
+    flex-direction: column;
+    text-align: center;
+  }
+}

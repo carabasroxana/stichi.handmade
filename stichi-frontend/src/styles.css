@@ -1,0 +1,17 @@
+:root {
+  --pink-light:  #F7D1DA;
+  --pink-medium: #E99FAD;
+  --pink-dark:   #D46C7E;
+  --white:       #FFFFFF;
+  --gray-light:  #F0ECE9;
+  --text-dark:   #333333;
+  --bg-light:    #faf7f3;
+  --bg-white:    #ffffff;
+  --green-olive: #969c5f;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+  font-family: 'Lato', sans-serif;
+}

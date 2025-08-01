@@ -1,0 +1,72 @@
+<header>
+  <div class="nav-container">
+    <nav>
+      <ul>
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/products">Products</a></li>
+        <li><a routerLink="/contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="lang-switch">
+      <button class="lang-btn" (click)="switchLang()">
+        {{ 'btn.language' | translate }}
+      </button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>{{ welcomeMessage }}</h1>
+    <p class="tagline">{{ subtitle }}</p>
+
+    <a routerLink="/products" class="btn">
+      {{ 'home.productsButton' | translate }}
+    </a>
+
+    <p>
+      {{ 'home.followText' | translate }}
+      <a
+        class="instagram-link"
+        (click)="openInstagram()"
+        style="cursor: pointer"
+      >
+        &#64;stichi.handmade
+      </a>
+    </p>
+  </div>
+
+  <div class="hero-image">
+    <img ngSrc="assets/images/logo.jpg" alt="Stichi Handmade logo" height="1600" width="1600"/>
+  </div>
+</section>
+
+<section class="featured-products">
+  <h2>{{ 'home.featuredTitle' | translate }}</h2>
+  <div class="grid">
+    <div class="card" *ngFor="let p of featured">
+      <img [src]="p.imageUrl" [alt]="p.name" />
+      <h3>{{ p.name }}</h3>
+      <p class="price">{{ p.price | currency:'RON' }}</p>
+    </div>
+  </div>
+
+  <a routerLink="/products" class="view-all">
+    {{ 'home.viewAllProducts' | translate }}
+  </a>
+</section>
+
+<section class="about-me">
+  <div class="img-wrapper">
+    <img src="assets/images/aboutme.jpg" alt="Me at work" />
+  </div>
+  <div class="about-text">
+    <h2>{{ 'home.aboutTitle' | translate }}</h2>
+    <p>{{ 'home.aboutText' | translate }}</p>
+  </div>
+</section>
+
+<footer>
+  &copy; {{ today | date:'y' }} Stichi Handmade | Handcrafted in Romania
+</footer>

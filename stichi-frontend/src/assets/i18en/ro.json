@@ -1,0 +1,26 @@
+{
+  "btn": {
+    "language": "English"
+  },
+  "home": {
+    "productsButton": "Produse",
+    "followText": "Urmărește-mi activitatea pe Instagram:",
+    "featuredTitle": "Produse noi",
+    "viewAllProducts": "Vezi toate produsele",
+    "aboutTitle": "Despre mine",
+    "aboutText": "Transform materiale simple în haine unice, care se simt la fel de bine pe cât arată..."
+  },
+  "contact": {
+    "title": "Contactează-mă",
+    "name": "Nume",
+    "email": "Email",
+    "message": "Mesaj",
+    "placeholder": {
+      "name": "Numele tău",
+      "email": "tu@exemplu.com",
+      "message": "Cu ce te pot ajuta?"
+    },
+    "success": "Mulțumesc! Îți voi răspunde în scurt timp.",
+    "error": "Oops, ceva nu a mers bine."
+  }
+}
